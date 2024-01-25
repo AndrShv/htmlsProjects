@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор</title>
+</head>
+<body>
+<h1>Простой калькулятор</h1>
+<form action="/api/calculator/add" method="get">
+    <label for="num1">Число 1:</label>
+    <input type="text" id="numF" name="num1" required>
+    <label for="num2">Число 2:</label>
+    <input type="text" id="numS" name="num2" required>
+    <button type="submit">Сложить</button>
+</form>
+
+<form action="/api/calculator/subtract" method="get">
+    <label for="num1">Число 1:</label>
+    <input type="text" id="numF1" name="num1" required>
+    <label for="num2">Число 2:</label>
+    <input type="text" id="numF2" name="num2" required>
+    <button type="submit">Вычесть</button>
+</form>
+
+<form action="/api/calculator/multiply" method="get">
+    <label for="num1">Число 1:</label>
+    <input type="text" id="numF1S" name="num1" required>
+    <label for="num2">Число 2:</label>
+    <input type="text" id="numF2S" name="num2" required>
+    <button type="submit">Умножить</button>
+</form>
+
+<form action="/api/calculator/divide" method="get">
+    <label for="num1">Число 1:</label>
+    <input type="text" id="num1" name="num1" required>
+    <label for="num2">Число 2:</label>
+    <input type="text" id="num2" name="num2" required>
+    <button type="submit">Разделить</button>
+</form>
+</body>
+</html>
