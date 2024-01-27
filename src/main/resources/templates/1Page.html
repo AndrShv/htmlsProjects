@@ -4,39 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        input {
+            padding: 5px;
+            width: 150px;
+        }
+
+        button {
+            padding: 8px;
+            margin-top: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>Простой калькулятор</h1>
-<form action="/api/calculator/add" method="get">
-    <label for="num1">Число 1:</label>
-    <input type="text" id="numF" name="num1" required>
-    <label for="num2">Число 2:</label>
-    <input type="text" id="numS" name="num2" required>
-    <button type="submit">Сложить</button>
-</form>
+<div class="container">
+    <h1 class="mt-4">Простой калькулятор</h1>
 
-<form action="/api/calculator/subtract" method="get">
-    <label for="num1">Число 1:</label>
-    <input type="text" id="numF1" name="num1" required>
-    <label for="num2">Число 2:</label>
-    <input type="text" id="numF2" name="num2" required>
-    <button type="submit">Вычесть</button>
-</form>
+    <form id="calculatorForm" class="mt-4">
+        <div class="form-group">
+            <label for="num1">Число 1:</label>
+            <input type="text" class="form-control" id="num1" name="num1" required>
+        </div>
+        <div class="form-group">
+            <label for="num2">Число 2:</label>
+            <input type="text" class="form-control" id="num2" name="num2" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="performOperation('add')">Сложить</button>
+        <button type="button" class="btn btn-primary" onclick="performOperation('subtract')">Вычесть</button>
+        <button type="button" class="btn btn-primary" onclick="performOperation('multiply')">Умножить</button>
+        <button type="button" class="btn btn-primary" onclick="performOperation('divide')">Разделить</button>
+    </form>
 
-<form action="/api/calculator/multiply" method="get">
-    <label for="num1">Число 1:</label>
-    <input type="text" id="numF1S" name="num1" required>
-    <label for="num2">Число 2:</label>
-    <input type="text" id="numF2S" name="num2" required>
-    <button type="submit">Умножить</button>
-</form>
+    <div id="result-container" class="mt-4">
+        <h2>Результат:</h2>
+        <p id="result">Здесь будет результат</p>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    function performOperation(operation) {
+        var num1 = parseFloat(document.getElementById('num1').value);
+        var num2 = parseFloat(document.getElementById('num2').value);
 
-<form action="/api/calculator/divide" method="get">
-    <label for="num1">Число 1:</label>
-    <input type="text" id="num1" name="num1" required>
-    <label for="num2">Число 2:</label>
-    <input type="text" id="num2" name="num2" required>
-    <button type="submit">Разделить</button>
-</form>
+        if (isNaN(num1) || isNaN(num2)) {
+            alert("Введите числовые значения для обоих полей");
+            return;
+        }
+
+        var result;
+        switch (operation) {
+            case 'add':
+                result = num1 + num2;
+                break;
+            case 'subtract':
+                result = num1 - num2;
+                break;
+            case 'multiply':
+                result = num1 * num2;
+                break;
+            case 'divide':
+                if (num2 !== 0) {
+                    result = num1 / num2;
+                } else {
+                    alert("На ноль делить нельзя");
+                    return;
+                }
+                break;
+            default:
+                alert("Недопустимая операция");
+                return;
+        }
+
+        document.getElementById('result').innerText = 'Результат: ' + result;
+    }
+</script>
 </body>
 </html>
